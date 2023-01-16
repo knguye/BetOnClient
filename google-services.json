@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "617505022738",
+    "project_id": "betonclient",
+    "storage_bucket": "betonclient.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617505022738:android:12e7edaea4148133c209cb",
+        "android_client_info": {
+          "package_name": "com.betonapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617505022738-0lfe1urg2on9tob43c77llrns20sd20j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnTJjHD8jAfv7_cPitOyKBbLe_w5H9MIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617505022738-0lfe1urg2on9tob43c77llrns20sd20j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617505022738-lqkmeduvmflfmmvdgo420kun91027mln.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.betonapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
