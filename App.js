@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { createContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens';
+import { LoginScreen, HomeScreen, RegistrationScreen, SplashScreen } from './src/screens';
 import { decode, encode } from 'base-64';
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -83,7 +83,7 @@ export function App() {
 
   if (loading) {
     return (
-      <></>
+      <SplashScreen></SplashScreen>
     )
   }
   return (
