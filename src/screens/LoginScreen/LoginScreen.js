@@ -2,15 +2,23 @@ import React, {useState} from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { firebase } from '../../firebase/config'
+//require('dotenv').config();
+
+import { changeUser } 
+            from '../../features/users/usersSlice';
+
 
 export default function LoginScreen({navigation}){
+    // TODO: Use route.params to get navigation params passed, use JSON.stringify() to get the data displayed
+    const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const onFooterLinkPress = () => {
-        navigation.navigate('Registration')
+        navigation.navigate('RegistrationScreen');
     }
 
     // Firestore method
@@ -20,22 +28,29 @@ export default function LoginScreen({navigation}){
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid; // Get UID from response
-                // TODO: Get user w/ id from localized SQL db instead!
-                const usersRef = firebase.firestore().collection('users');
-                usersRef
-                    .doc(uid) // Find user firestore Document using UID
-                    .get()
-                    .then(firestoreDocument => {
-                        if(!firestoreDocument.exists) { 
-                            alert('User does not exist anymore.');
-                            return;
-                        }
-                        const user = firestoreDocument.data() // Successfully get user info from collection
-                        navigation.navigate('Home', {user});
-                    })
-                    .catch(error => {
-                        alert(error);
-                    });
+            
+                fetch(`https://bet-on-server.onrender.com/users/${uid}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then ((value) => {
+                    const user = value;
+                    if (user.id != uid){
+                        alert('User does not exist!');
+                        return;
+                    }
+                    // TODO: Set redux state usertoken to ID
+                    dispatch(changeUser(user));
+                    navigation.navigate('HomeScreen', user);
+                })
+                .catch ((err) => {
+                    alert(err);
+                });
             })
             .catch(error => {
                 alert(error);

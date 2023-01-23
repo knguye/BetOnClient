@@ -2,6 +2,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
+//import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/compat/auth';
+
 // TODO: Replace config values with environment vars for generic login
 
 const firebaseConfig = {
@@ -13,7 +15,14 @@ const firebaseConfig = {
     appId: "1:617505022738:web:458f1b37b8babedbc209cb",
     measurementId: "G-T0PV4XV4J7"
   };
-  
+
+// TODO: Add scopes (get contacts, etc for sharing the app)
+/*
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+const provider = new GoogleAuthProvider();
+*/
+
 
 if (!firebase.apps.length){
     const app = firebase.initializeApp(firebaseConfig);

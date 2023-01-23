@@ -3,6 +3,7 @@ import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View } from 'rea
 import styles from './styles'
 
 import { firebase } from '../../firebase/config';
+//require('dotenv').config();
 
 export default function HomeScreen(props) {
     const [entityText, setEntityText] = useState('');
@@ -13,7 +14,7 @@ export default function HomeScreen(props) {
     const userId = props.extraData.id;
 
     useEffect(() => {
-        entityRef
+        /* entityRef
             .where("authorId", "==", userId)
             .orderBy('createdAt', 'desc')
             .onSnapshot(
@@ -30,10 +31,12 @@ export default function HomeScreen(props) {
                     console.log(error);
                 }
             )
+        */
     }, []);
 
 
     const onAddButtonPress = () => {
+        /*
         if (entityText && entityText.length > 0){
             const timestamp = firebase.firestore.FieldValue.serverTimestamp(); // TODO: Get timestamp from SQL db
             const data = {
@@ -51,44 +54,29 @@ export default function HomeScreen(props) {
                     alert(error)
                 });
         }
+        */
     }
 
     const renderEntity = ({item, index}) => {
+        /*
         return (
             <View style={styles.entityContainer}>
                 <Text style={styles.entityText}>
                     {index}. {item.text}
                 </Text>
             </View>
-        )
+        )*/
     }
 
+    // TODO: Display user data for demo
+
+    
+
+    
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Add new entity'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEntityText(text)}
-                    value={entityText}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize='none'
-                    />
-                <TouchableOpacity style={styles.button} onPress={onAddButtonPress}>
-                    <Text style={styles.buttonText}>Add</Text>
-                </TouchableOpacity>
-            </View>
-            { entities ? (
-                <View style={styles.listContainer}>
-                    <FlatList
-                        data={entities}
-                        renderItem={renderEntity}
-                        keyExtractor={(item) => item.id}
-                        removeClippedSubviews={true}
-                    />
-                </View>
-            ) : null}
+            
+            
         </View>
     )
 }
