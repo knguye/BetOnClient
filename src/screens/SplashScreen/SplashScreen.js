@@ -7,7 +7,7 @@ export default function SplashScreen({navigation}){
         <View>
            <Image 
                 style={styles.logo}
-                source={require('../../../assets/icon.png')}/> 
+                source={require('../../../assets/logo.png')}/> 
         </View>
     )
 }

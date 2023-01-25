@@ -1,22 +1,14 @@
 import { StyleSheet } from 'react-native';
-
+import { colors } from '../../utilities/commonStyles';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: colors['black'],
+        color: colors['white']
     },
-    formContainer: {
-        flexDirection: 'row',
-        height: 80,
-        marginTop: 40,
-        marginBottom: 20,
-        flex: 1,
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 30,
-        paddingRight: 30,
-        justifyContent: 'center',
-        alignItems: 'center'
+    showcase: {
+
     },
     input: {
         height: 48,
@@ -39,18 +31,4 @@ export default StyleSheet.create({
         color: 'white',
         fontSize: 16
     },
-    listContainer: {
-        marginTop: 20,
-        padding: 20,
-    },
-    entityContainer: {
-        marginTop: 16,
-        borderBottomColor: '#cccccc',
-        borderBottomWidth: 1,
-        paddingBottom: 16
-    },
-    entityText: {
-        fontSize: 20,
-        color: '#333333'
-    }
 })

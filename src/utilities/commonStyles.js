@@ -1,7 +1,14 @@
 export const colors = {
-    'red': '#bb1c1c',
+    'red': '#BB1C1C',
     'black': '#282828',
-    'yellow': '#FFC914',
+    'yellow': '#EEBF27',
     'lightgrey': '#E8E9EB',
-    'green': '#31E981' 
+    'darkgrey': '#585858',
+    'green': '#31E981', 
+    'white': '#FFFFFF',
 }
+
+// Buttons
+
+
+// Views

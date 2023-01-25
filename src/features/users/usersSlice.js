@@ -6,6 +6,8 @@ export const usersSlice = createSlice({
         id: null,
         email: null,
         fullname: null,
+        username: null,
+        phone_number: null,
     },
     reducers: {
         changeUser: (state, action) => {
@@ -19,17 +21,22 @@ export const usersSlice = createSlice({
 
         clearUser: (state) => {
             var newState = {
+                ...state,
                 id: null,
                 email: null,
                 fullname: null,
+                username: null,
+                phone_number: null,
             };
-            return newState
+            return newState;
         }
     }
 })
 
-export const selectUser = (state) => {state.users.userToken};
-
+/*
+export const selectUser = (state) => { state.users };
+export const selectUserId = (state) => { state.users.id }
+*/
 export const { changeUser, clearUser } = usersSlice.actions;
 
 export default usersSlice.reducer

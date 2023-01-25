@@ -1,6 +1,8 @@
 import { Button } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../features/users/usersSlice'
+import { firebase } from '../firebase/config';
+import * as commonStyles from './commonStyles';
 
 export function GoogleLoginButton(){
     return (
@@ -23,15 +25,37 @@ export function GoogleLoginButton(){
     )
 }
 
+function GenericButton(props){
+    return (
+        <Button onPress={props.onPress} title={props.title} color={commonStyles.colors['black']}/>
+    )
+}
+
+
 export function LogoutButton({navigation}) {
     const dispatch = useDispatch();
     const userToken = useSelector((state) => state.users);
 
+    // TODO: Move this functionality to app.js?
+    const onButtonPress = () => {
+        console.log(`Clearing user: ${JSON.stringify(userToken)}`);
+        dispatch(clearUser());
+        firebase.auth().signOut();
+    }
 
     return (
-        <Button onPress={() => {
-            console.log(`Clearing user: ${JSON.stringify(userToken)}`);
-            dispatch(clearUser());
-        }} title={"Logout"}/>
+        <GenericButton onPress={onButtonPress} title={"Logout"}/>
+    )
+}
+
+export function SidebarButton({navigation}){
+    const dispatch = useDispatch();
+    
+    const onButtonPress = () => {
+
+    }
+
+    return (
+        <GenericButton onPress={onButtonPress}/>
     )
 }

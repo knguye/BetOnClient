@@ -4,17 +4,20 @@ import { colors } from '../../utilities/commonStyles'
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: colors['black'],
+        color: colors['white'],
     },
     title: {
 
     },
     logo: {
-        flex: 1,
-        height: 120,
-        width: 90,
+        height: 100,
+        width: 130,
         alignSelf: "center",
-        margin: 30
+        margin: 50,
+        padding: 50,
+        marginTop: 100
     },
     input: {
         height: 48,
@@ -28,7 +31,7 @@ export default StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        backgroundColor: '#788eec',
+        backgroundColor: colors['red'],
         marginLeft: 30,
         marginRight: 30,
         marginTop: 20,
@@ -49,10 +52,10 @@ export default StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        color: '#2e2e2d'
+        color: colors['white'],
     },
     footerLink: {
-        color: "#788eec",
+        color: colors['red'],
         fontWeight: "bold",
         fontSize: 16
     }

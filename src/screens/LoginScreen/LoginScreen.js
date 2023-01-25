@@ -5,11 +5,13 @@ import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { firebase } from '../../firebase/config'
+import { production, development } from '../../../__globals__';
 //require('dotenv').config();
 
 import { changeUser } 
             from '../../features/users/usersSlice';
 
+const serverDomain = development.serverDomain;
 
 export default function LoginScreen({navigation}){
     // TODO: Use route.params to get navigation params passed, use JSON.stringify() to get the data displayed
@@ -29,7 +31,7 @@ export default function LoginScreen({navigation}){
             .then((response) => {
                 const uid = response.user.uid; // Get UID from response
             
-                fetch(`https://bet-on-server.onrender.com/users/${uid}`, {
+                fetch(`${serverDomain}/id/${uid}`, {
                     method: "GET",
                     headers: {
                         "Content-type": "application/json"
@@ -64,7 +66,7 @@ export default function LoginScreen({navigation}){
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')} />    
+                    source={require('../../../assets/logo.png')} />    
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'

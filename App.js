@@ -8,12 +8,12 @@ if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 import { firebase } from './src/firebase/config';
 
-import * as SecureStore from 'expo-secure-store';
+import { colors } from './src/utilities/commonStyles';
+import { LogoTitle } from './src/utilities/commonViews';
+
 import { useSelector, useDispatch, Provider } from 'react-redux'
 import { changeUser, 
-          clearUser, 
-          selectUserToken,
-          selectCount } from './src/features/users/usersSlice';
+          clearUser } from './src/features/users/usersSlice';
 import store from './src/store';
 //require('dotenv').config();
 
@@ -29,8 +29,6 @@ export default function AppWrapper() {
     </Provider>
   )
 }
-
-
 
 export function App() {
   
@@ -68,15 +66,16 @@ export function App() {
                 return;
             }
             dispatch(changeUser(userData));
+            //console.log(userData);
             setLoading(false);
         })
         .catch ((err) => {
             setLoading(false);
-            //alert(err); // TODO: Fix JSON parse error.. shows up even if it works.. peerplexing
+            console.log(err);
         });
       }
       else {
-          setLoading(false)
+          setLoading(false);
       }
     });
   }, []);
@@ -91,16 +90,27 @@ export function App() {
         <Stack.Navigator>
           { userToken ? (
             <Stack.Screen name='HomeScreen' options={ {
-              headerRight: () => <LogoutButton></LogoutButton>
+              headerRight: () => <LogoutButton></LogoutButton>,
+              headerStyle: {
+                backgroundColor: colors['red'],
+                borderBottomWidth: 0,
+                height: 100
+              },
+              headerTintColor: colors['lightgrey'],
+              headerTitle: (props) => <LogoTitle {...props}/>,
+              headerTitleAlign: 'center',
+
             }}>
-              { props => <HomeScreen {...props} extraData={user} /> }
+              { props => <HomeScreen {...props} /> }
             </Stack.Screen>
           ) : (
             <>
               <Stack.Screen name='LoginScreen' component={LoginScreen} options={ {
-              headerRight: () => <LogoutButton></LogoutButton>
+                headerShown: false
+              }} />
+              <Stack.Screen name='RegistrationScreen' component={RegistrationScreen} headerBackVisible={true} options={ {
+                headerShown: false
               }}/>
-              <Stack.Screen name='RegistrationScreen' component={RegistrationScreen} headerBackVisible={true}/>
             </>
           )}
         </Stack.Navigator>

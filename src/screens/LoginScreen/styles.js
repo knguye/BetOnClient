@@ -5,7 +5,8 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: colors['lightgrey'],
+        backgroundColor: colors['black'],
+        color: colors['white'],
     },
     title: {
 
@@ -15,7 +16,8 @@ export default StyleSheet.create({
         width: 130,
         alignSelf: "center",
         margin: 50,
-        padding: 50
+        padding: 50,
+        marginTop: 200
     },
     input: {
         height: 48,
@@ -48,7 +50,7 @@ export default StyleSheet.create({
     },
     footerText: {
         fontSize: 16,
-        color: '#2e2e2d'
+        color: colors['white']
     },
     footerLink: {
         color: colors['red'],
