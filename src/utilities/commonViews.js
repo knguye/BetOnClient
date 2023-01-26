@@ -31,3 +31,18 @@ export function Panel(props){
             </Card>
     )
 }
+
+
+export function Icon(props){
+    const sources = {
+        'home': require('../../assets/icons/icons8-home-50.png'),
+        'profile': require('../../assets/icons/icons8-profile-50.png'),
+        'balances': require('../../assets/icons/icons8-balances-50.png'),
+        'mybets': require('../../assets/icons/icons8-mybets-50.png'),
+        'create': require('../../assets/icons/icons8-create-50.png'),
+    }
+
+    return (
+        <Image style={{resizeMode: 'contain', width: 30, height: 30}} source={sources[props.name]}></Image>
+    )
+}

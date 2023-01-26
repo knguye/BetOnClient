@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-//import { FlatList, Keyboard, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
-import { FlatList, Keyboard, TouchableOpacity, ScrollView } from 'react-native';
-import { View, TextField, Text, Button, Carousel, Card } from 'react-native-ui-lib';
+import { ScrollView } from 'react-native';
+import { View, Text, Card } from 'react-native-ui-lib';
 
 import styles from './styles'
-import { Panel } from '../../utilities/commonViews';
 import { colors } from '../../utilities/commonStyles';
+import { Icon } from '../../utilities/commonViews';
 
-import { firebase } from '../../firebase/config';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { ProfileScreen } from '../';
+
 //require('dotenv').config();
 
-export default function HomeScreen(props) {
+const Tab = createBottomTabNavigator();
+
+export function HomeContents() {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView>
@@ -39,7 +43,29 @@ export default function HomeScreen(props) {
                     <Text color={colors['white']} body>Test</Text>
                 </Card>
             </ScrollView>
+
             </KeyboardAwareScrollView>
         </View>
+    )
+}
+
+export default function HomeScreen(props) {
+
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeContents} 
+                options={ {
+                    headerShown: false,
+                    tabBarIcon: () => <Icon name={'home'}></Icon>
+                } }
+            ></Tab.Screen>
+            <Tab.Screen name="Profile" component={ProfileScreen}
+                options={ {
+                    headerShown: false,
+                    tabBarIcon: () => <Icon name={'profile'}></Icon>
+                } }
+            ></Tab.Screen>
+
+        </Tab.Navigator>
     )
 }

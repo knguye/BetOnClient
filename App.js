@@ -20,7 +20,9 @@ import store from './src/store';
 // Utilities
 import {LogoutButton} from './src/utilities/buttons';
 
+
 const Stack = createStackNavigator();
+
 
 export default function AppWrapper() {
   return (
@@ -29,7 +31,6 @@ export default function AppWrapper() {
     </Provider>
   )
 }
-
 export function App() {
   
   // Redux State
@@ -89,20 +90,20 @@ export function App() {
       <NavigationContainer>
         <Stack.Navigator>
           { userToken ? (
-            <Stack.Screen name='HomeScreen' options={ {
-              headerRight: () => <LogoutButton></LogoutButton>,
-              headerStyle: {
-                backgroundColor: colors['red'],
-                borderBottomWidth: 0,
-                height: 100
-              },
-              headerTintColor: colors['lightgrey'],
-              headerTitle: (props) => <LogoTitle {...props}/>,
-              headerTitleAlign: 'center',
+              <Stack.Screen name='HomeScreen' options={ {
+                headerRight: () => <LogoutButton></LogoutButton>,
+                headerStyle: {
+                  backgroundColor: colors['red'],
+                  borderBottomWidth: 0,
+                  height: 100
+                },
+                headerTintColor: colors['lightgrey'],
+                headerTitle: (props) => <LogoTitle {...props}/>,
+                headerTitleAlign: 'center',
 
-            }}>
-              { props => <HomeScreen {...props} /> }
-            </Stack.Screen>
+              }}>
+                { props => <HomeScreen {...props} /> }
+              </Stack.Screen>
           ) : (
             <>
               <Stack.Screen name='LoginScreen' component={LoginScreen} options={ {
