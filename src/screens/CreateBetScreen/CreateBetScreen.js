@@ -2,7 +2,7 @@ import { React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { View } from 'react-native';
 import styles from './styles';
-import { TextField } from 'react-native-ui-lib/src/incubator';
+import { TextField, Text } from 'react-native-ui-lib/src/incubator';
 import { OptionButton, OptionButtonArray } from '../../utilities/buttons';
 
 import * as commonStyles from '../../utilities/commonStyles';
@@ -143,7 +143,12 @@ function MoneylineBetOptions(props){
                     underlineColorAndroid={"transparent"}
                     autoCapitalize='words'
                     keyboardType={'decimal-pad'}/>
+            </View>
 
+            <View style={{
+                flexDirection: 'row',
+            }}>
+                <Text>Custom wager instead?</Text>
             </View>
         </ExpandedBetOptions>
     )
