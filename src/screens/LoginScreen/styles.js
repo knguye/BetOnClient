@@ -9,7 +9,7 @@ export default StyleSheet.create({
         color: colors['white'],
     },
     title: {
-
+        
     },
     logo: {
         height: 100,

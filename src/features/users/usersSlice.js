@@ -20,14 +20,10 @@ export const usersSlice = createSlice({
         },
 
         clearUser: (state) => {
-            var newState = {
-                ...state,
-                id: null,
-                email: null,
-                fullname: null,
-                username: null,
-                phone_number: null,
-            };
+            var newState = {...state}
+            for (const prop in state){
+                newState[prop] = null;
+            }
             return newState;
         }
     }

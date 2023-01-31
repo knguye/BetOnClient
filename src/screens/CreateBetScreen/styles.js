@@ -7,20 +7,24 @@ export default StyleSheet.create({
         backgroundColor: colors['black'],
         color: colors['white']
     },
-    mainpage: {
-        flex: 1,
-        backgroundColor: colors['black'],
-        color: colors['white']  
-    }, 
-    sectionHeader: {
+    titleField: {
+        marginVertical: 20,
+        height: 48,
         fontSize: 36,
+        overflow: 'visible',
+        textAlign: 'center',
+        color: colors['white']
+    },  
+    textField: {
+        fontSize: 16,
+        width: 180,
         color: colors['white'],
-        marginTop: 10
+        backgroundColor: colors['darkgrey'],
+        margin: 5,
+        paddingVertical: 10,
+        borderRadius: 2,
     },
-    showcase: {
-        marginVertical: 10,
 
-    },
     input: {
         height: 48,
         borderRadius: 5,

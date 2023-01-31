@@ -1,8 +1,11 @@
-import { Button } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../features/users/usersSlice'
 import { firebase } from '../firebase/config';
 import * as commonStyles from './commonStyles';
+import { PageControlPosition } from "react-native-ui-lib";
+import { useCallback, useEffect, useState } from "react";
+import styles from "../screens/CreateBetScreen/styles";
 
 export function GoogleLoginButton(){
     return (
@@ -25,14 +28,37 @@ export function GoogleLoginButton(){
     )
 }
 
-function GenericButton(props){
+function Button(props){
+    const style = {
+        backgroundColor: (props.color) ? props.color : commonStyles.colors['black'],
+        borderRadius: 5,
+        padding: (props.padding) ? props.padding : 10,
+        margin: 5,
+        color: commonStyles.colors['white'],
+    }
+
+    if (props.color)
+    {
+        return (
+            <Pressable onPress={props.onPress} 
+                    style={style}>
+                    <Text style={commonStyles.styles.buttonText}>{props.title}</Text>
+                    {props.children}
+            </Pressable>
+        )
+    }
+
     return (
-        <Button onPress={props.onPress} title={props.title} color={commonStyles.colors['black']}/>
+        <Pressable onPress={props.onPress} 
+                    style={style}>
+                        <Text style={commonStyles.styles.buttonText}>{props.title}</Text>
+                        {props.children}
+        </Pressable>
     )
 }
 
 
-export function LogoutButton({navigation}) {
+export function LogoutButton() {
     const dispatch = useDispatch();
     const userToken = useSelector((state) => state.users);
 
@@ -44,7 +70,7 @@ export function LogoutButton({navigation}) {
     }
 
     return (
-        <GenericButton onPress={onButtonPress} title={"Logout"}/>
+        <Button onPress={onButtonPress} title={"Logout"}/>
     )
 }
 
@@ -56,6 +82,59 @@ export function SidebarButton({navigation}){
     }
 
     return (
-        <GenericButton onPress={onButtonPress}/>
+        <Button onPress={onButtonPress}/>
+    )
+}
+
+export function OptionButtonArray(props){
+    const [selected, setSelected] = useState('');
+    const [optionButtons, setOptionButtons] = useState(<></>);
+
+    function handleSelectedChange(item){
+        props.onChange(item);
+    }
+
+    const onSelectOption = 
+        (item) => {
+            setSelected(item);
+
+        }
+    
+
+    useEffect(() => {
+        setOptionButtons(props.options.map((item, key) => (
+            <OptionButton key={key} title={item} 
+                            selected={selected == item ? true : false}
+                            onPress={()=>{ handleSelectedChange(item); onSelectOption(item);  }}>
+            </OptionButton>
+        )));
+    }, [selected])
+
+
+    if (props.options){
+        return (
+            <View style={commonStyles.styles.horizontalContainer}>
+                {
+                    optionButtons
+                }
+            </View>
+        )
+
+    }
+
+}
+
+export function OptionButton(props){
+
+    return (
+        <Button onPress={props.onPress}
+                            title={props.title} 
+                                color={
+                                    (props.selected) ? commonStyles.colors['red'] : commonStyles.colors['darkgrey']
+                                } 
+                                padding={20}
+                                    style={commonStyles.styles.optionButton}>
+                                    {props.children}
+                                </Button>
     )
 }
