@@ -3,16 +3,22 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { firebase } from '../../firebase/config';
-import { production, development } from '../../../__globals__';
 //require('dotenv').config();
 
 // Global State
 import { useSelector, useDispatch } from 'react-redux'
 import { changeUser } 
             from '../../features/users/usersSlice';
-import store from '../../store';
 
-const serverDomain = development.serverDomain; // TODO: Change based on server
+import { REACT_APP_SERVER_API } from '@env'
+
+const serverDomain = REACT_APP_SERVER_API;
+
+/*  Features to add TODO:
+    1.  Client side validation before firebase auth does (display warnings before submit)
+    2.  Parsing information to get appropriate format
+    3.  Disable registration on validation fail
+*/
 
 export default function RegistrationScreen({navigation}) {
     const userToken = useSelector((state) => state.users.value);

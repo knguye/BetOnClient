@@ -5,16 +5,22 @@ import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { firebase } from '../../firebase/config'
-import { production, development } from '../../../__globals__';
+
+import { REACT_APP_SERVER_API } from '@env'
 //require('dotenv').config();
 
 import { changeUser } 
             from '../../features/users/usersSlice';
 
-const serverDomain = development.serverDomain;
+
+/*  Features to add TODO:
+    1.  Google login
+    2.  Apple login
+    3.  Facebook Login
+*/
 
 export default function LoginScreen({navigation}){
-    // TODO: Use route.params to get navigation params passed, use JSON.stringify() to get the data displayed
+    const serverDomain = REACT_APP_SERVER_API;
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,12 +31,13 @@ export default function LoginScreen({navigation}){
 
     // Firestore method
     const onLoginPress = () => {
+        console.log("API: " + serverDomain);
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid; // Get UID from response
-            
+                
                 fetch(`${serverDomain}/id/${uid}`, {
                     method: "GET",
                     headers: {
@@ -48,6 +55,7 @@ export default function LoginScreen({navigation}){
                     }
                     // TODO: Set redux state usertoken to ID
                     dispatch(changeUser(user));
+                    // TODO: Get all bets for that user with state
                     navigation.navigate('HomeScreen', user);
                 })
                 .catch ((err) => {

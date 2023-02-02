@@ -17,7 +17,7 @@ export default StyleSheet.create({
         alignSelf: "center",
         margin: 50,
         padding: 50,
-        marginTop: 200
+        marginTop: 150
     },
     input: {
         height: 48,

@@ -6,6 +6,7 @@ import * as commonStyles from './commonStyles';
 import { PageControlPosition } from "react-native-ui-lib";
 import { useCallback, useEffect, useState } from "react";
 import styles from "../screens/CreateBetScreen/styles";
+import { clearAllBets } from "../features/bets/betsSlice";
 
 export function GoogleLoginButton(){
     return (
@@ -66,6 +67,7 @@ export function LogoutButton() {
     const onButtonPress = () => {
         console.log(`Clearing user: ${JSON.stringify(userToken)}`);
         dispatch(clearUser());
+        dispatch(clearAllBets());
         firebase.auth().signOut();
     }
 

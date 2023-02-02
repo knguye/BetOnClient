@@ -15,14 +15,13 @@ import { useSelector, useDispatch, Provider } from 'react-redux'
 import { changeUser, 
           clearUser } from './src/features/users/usersSlice';
 import store from './src/store';
-//require('dotenv').config();
+import {REACT_APP_SERVER_API} from '@env';
 
 // Utilities
 import {LogoutButton} from './src/utilities/buttons';
 
-
 const Stack = createStackNavigator();
-
+const serverDomain = REACT_APP_SERVER_API;
 
 export default function AppWrapper() {
   return (
@@ -51,7 +50,7 @@ export function App() {
         const uid = user.uid; // Get user ID from firebase authentication
         
         // Get user information from user id
-        fetch(`https://bet-on-server.onrender.com/users/${uid}`, {
+        fetch(`${serverDomain}/users/${uid}`, {
           method: "GET",
           headers: {
               "Content-type": "application/json"

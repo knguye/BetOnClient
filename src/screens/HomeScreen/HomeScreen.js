@@ -13,6 +13,12 @@ import { ProfileScreen, CreateBetScreen, BalancesScreen, MyBetsScreen } from '..
 
 //require('dotenv').config();
 
+/*  Features to add TODO:
+    1. Community posts/bets (set up table in backend)
+    2. Hot local bets
+    3. Ongoing bets
+*/
+
 const Tab = createBottomTabNavigator();
 
 export function HomeContents() {
@@ -23,14 +29,14 @@ export function HomeContents() {
                                         style={{backgroundColor: colors['black']}}
                                             contentContainerStyle={{alignItems: 'center'}}>
             <View style={{flex: 1}}>
-            <Text style={styles.sectionHeader}>Hot Bets</Text>
+            <Text style={styles.sectionHeader}>Ongoing Bets</Text>
                 <ScrollView padding-page
                                     horizontal={true} 
                                         style={styles.showcase}>
-                    <BetPanel info={'test12'}></BetPanel>
-                    <BetPanel info={'Hi'}></BetPanel>
-                    <BetPanel info={'Hi'}></BetPanel>
-                    <BetPanel info={'Hi'}></BetPanel>
+                    <BetPanel></BetPanel>
+                    <BetPanel></BetPanel>
+                    <BetPanel></BetPanel>
+                    <BetPanel></BetPanel>
                 </ScrollView>
             </View>
             <SocialPanel></SocialPanel>

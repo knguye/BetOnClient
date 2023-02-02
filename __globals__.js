@@ -3,7 +3,7 @@ const production = {
 }
 
 const development = {
-    serverDomain: 'http://192.168.0.117:3001'
+    serverDomain: 'http://192.168.0.108:3001'
 }
 
 export { production, development };

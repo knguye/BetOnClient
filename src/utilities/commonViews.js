@@ -38,18 +38,30 @@ export function SocialPanel(props){
 
 export function BetPanel(props){
     const info = props.info;
+    console.log(info);
     // TODO: Parse bet info so it shows up formatted.
 
     /*
-        Info:
-            Owner username (prop controlled, shows up on hot bets, not on profile page latest bets)
-            Bet title
-            Team icons (user icon or icon chosen in make a bet)
-            Bet options/teams
-            Odds OR custom wager
-            Time Created
-            Expiry Date
-    */
+    const data = {
+        owner_id: 'BMrqIxmPuxTpU0tBjf00cIZ4Tqf1',
+        title: 'Test Bet',
+        description: 'This is a test',
+        bet_info: {
+            type: 'Moneyline',
+            isCustomWager: false,
+        teamsWithOdds: [
+                {
+                    team: 'Team 1',
+                    odds: '1.86'
+                },
+                {
+                    team: 'Team 2',
+                    odds: '2.14'
+                }
+            ],
+        },
+        created_at: now,
+    };*/
 
     /* Bet Types:
         Moneyline - Simple ML wager (money)
@@ -59,6 +71,30 @@ export function BetPanel(props){
         Odds - Odds are chosen on a odds ratio
         Custom Wager - Non monetary wager made, no odds (Loser/Winner has/gets to..)
     */
+    if (info){
+        const bet_info = info['bet_info'];
+        const team1 = bet_info['teamsWithOdds'][0];
+        const team2 = bet_info['teamsWithOdds'][1];
+
+            // If bet type == ML
+        return (
+            <Panel style={styles.betContainer} height={140} width={280}>
+                <Text h1 style={styles.panelText}>{info.title}</Text>
+                <View style={[styles.odds, styles.panelText]}>
+                    <View style={styles.team}>
+                        <Icon name={'profile'}></Icon>
+                        <Text style={styles.panelText}>{`${team1['name']}\n${team1['odds']}`}</Text>
+                    </View>
+                    <View style={styles.team}>
+                        <Icon name={'profile'}></Icon>
+                        <Text style={styles.panelText}>{`${team2['name']}\n${team2['odds']}`}</Text>
+                    </View>
+                </View>
+            </Panel>
+        )
+    }
+
+    
     
     // If bet type == ML
     return (
@@ -67,11 +103,11 @@ export function BetPanel(props){
             <View style={[styles.odds, styles.panelText]}>
                 <View style={styles.team}>
                     <Icon name={'profile'}></Icon>
-                    <Text style={styles.panelText}>{`Team 1\n+100`}</Text>
+                    <Text style={styles.panelText}>{`Name\n+100`}</Text>
                 </View>
                 <View style={styles.team}>
                     <Icon name={'profile'}></Icon>
-                    <Text style={styles.panelText}>{`Team 2\n+100`}</Text>
+                    <Text style={styles.panelText}>{`Name\n+100`}</Text>
                 </View>
             </View>
         </Panel>
