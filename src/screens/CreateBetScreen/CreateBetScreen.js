@@ -1,13 +1,13 @@
 import { React, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './styles';
-import { TextField, Text } from 'react-native-ui-lib/src/incubator';
-import { OptionButton, OptionButtonArray } from '../../utilities/buttons';
+import { TextField } from 'react-native-ui-lib/src/incubator';
+import { OptionButton, OptionButtonArray, SubmitButton } from '../../utilities/buttons';
 
 import * as commonStyles from '../../utilities/commonStyles';
 import { Icon } from '../../utilities/commonViews';
-import { KeyboardAwareScrollView } from 'react-native-ui-lib';
+import { KeyboardAwareScrollView, Switch } from 'react-native-ui-lib';
 import { TextInput } from 'react-native-gesture-handler';
 
 /*  TODO:
@@ -25,6 +25,8 @@ export default function CreateBetScreen() {
 
     const user = useSelector((state) => state.users);
     const bet = useSelector((state) => state.bets);
+
+    
 
     function handleOptionChange(option){
         setSelectedOption(option);
@@ -82,7 +84,64 @@ function MoneylineBetOptions(props){
             odds: undefined,
         },
     ]);
-    const [odds, setOdds] = useState([])
+
+    const [customWagerEnabled, setCustomWagerEnabled] = useState(false);
+    const [customWager, setCustomWager] = useState();
+    const [isValidBet, setIsValidBet] = useState(false);
+
+    useEffect(() => {
+        if (customWager == undefined && (teams[0].odds !== undefined && teams[1].odds !== undefined)){
+            setIsValidBet(true);
+         }
+         else if ((customWager !== undefined && (teams[0].odds == undefined || teams[1].odds == undefined) )){
+            setIsValidBet(true);
+         }
+         else {
+            setIsValidBet(false);
+         }
+    }, [teams, customWager]);
+
+    const SubmitBet = async () => {
+        console.log("Submitted");
+
+        // Create body for req
+        const data = {
+            owner_id: 'BMrqIxmPuxTpU0tBjf00cIZ4Tqf1',
+            title: 'Test Bet',
+            description: 'This is a test',
+            bet_info: {
+                type: 'Moneyline',
+                isCustomWager: false,
+            teamsWithOdds: [
+                    {
+                        team: 'Team 1',
+                        odds: '1.86'
+                    },
+                    {
+                        team: 'Team 2',
+                        odds: '2.14'
+                    }
+                ],
+            },
+            created_at: now,
+        };
+
+        await fetch(`${SERVER_ADDRESS}:${PORT}/bets`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((bets) => {
+            //Send the bets to redux state to use within the app presentations 
+        })
+
+        // Send fetch req to API
+    }
 
     const setTeam = (index, prop, val) => {
         const copyOfTeamsState = [...teams];
@@ -91,7 +150,6 @@ function MoneylineBetOptions(props){
         copyOfTeam[prop] = val;
 
         copyOfTeamsState[index] = copyOfTeam;
-        console.log(copyOfTeamsState);
         setTeams(copyOfTeamsState);
     } 
 
@@ -121,7 +179,7 @@ function MoneylineBetOptions(props){
                     autoCapitalize='words'/>
             </View>
 
-            <View style ={{
+            { !customWagerEnabled ? <View style ={{
                     flexDirection: 'row',
                 }}>
                 <TextInput
@@ -143,13 +201,54 @@ function MoneylineBetOptions(props){
                     underlineColorAndroid={"transparent"}
                     autoCapitalize='words'
                     keyboardType={'decimal-pad'}/>
+            </View> 
+                        :
+            <View>
+                <TextInput
+                    style={
+                        [styles.textField, styles.longTextField]
+                    }
+                    placeholder='Custom Wager'
+                    placeholderTextColor={"#aaaaaa"}
+                    onChangeText={(text) => {
+                        setCustomWager(text);
+                    }}
+                    value={customWager}
+                    textAlign='center'
+                    underlineColorAndroid={"transparent"}
+                    autoCapitalize='none'/>
             </View>
+            }
 
             <View style={{
                 flexDirection: 'row',
+                justifyContent: 'space-around'
             }}>
-                <Text>Custom wager instead?</Text>
+                <Text style={styles.labelText}>Custom wager instead?</Text>
+                <Switch 
+                    style={styles.switch}
+                    value={customWagerEnabled}
+                    onValueChange={(value) => 
+                                        { 
+                                            setCustomWagerEnabled(value);
+                                            if (value === false) {
+                                                setCustomWager(undefined);
+                                            }
+                                            else {
+                                                setTeam(0, 'odds', undefined);
+                                                setTeam(1, 'odds', undefined);
+                                            }
+                                        } }/>
             </View>
+
+            { isValidBet ?
+                <View>
+                    <SubmitButton
+                        title={'Submit'}
+                        onPress={() => onSubmitBet()}
+                    ></SubmitButton>
+                </View>
+            : null }
         </ExpandedBetOptions>
     )
 }

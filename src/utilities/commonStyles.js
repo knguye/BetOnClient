@@ -31,9 +31,13 @@ export const styles = StyleSheet.create({
     buttonText: {
         color: colors['white'],
         userSelect: 'none',
+        textAlign: 'center'
     },  
     optionButton:{
         paddingVertical: 10,
+    },
+    submitButton: {
+        
     },
     team: { 
       alignItems: 'center',

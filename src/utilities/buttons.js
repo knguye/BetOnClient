@@ -138,3 +138,17 @@ export function OptionButton(props){
                                 </Button>
     )
 }
+
+export function SubmitButton(props){
+    return (
+        <Button onPress={props.onPress}
+                            title={props.title} 
+                                color={
+                                    commonStyles.colors['red']
+                                } 
+                                padding={20}
+                                style={commonStyles.styles.submitButton}>
+                                {props.children}
+                            </Button>
+    )
+}
