@@ -1,19 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export const betsSlice = createSlice({
     name: 'bets',
     initialState: {
-        bets: [
-            /*
-            {
-                id: null,
-                owner_id: null,
-                title: null,
-                type: null,
-                custom_wager: null,
-                bet_info: {},
-            }*/
-        ],
+        bets: [],
+        currentBet: { // TODO: Remove this in favor of route params with Nav
+            id: null,
+            owner_id: null,
+            title: null,
+            type: null,
+            custom_wager: null,
+            bet_info: {},
+        }
     },
     reducers: {
         appendBet: (state, action) => {
@@ -45,16 +43,21 @@ export const betsSlice = createSlice({
                 ...state,
                 bets: [],
             }
+        },
+        
+        // TODO: Remove this, in favor of navigation param passing
+        changeCurrentBet: (state, action) => {
+            const newCurrentBet = {...state.currentBet}
+            for (const prop in action.payload){
+                newCurrentBet[prop] = action.payload[prop];
+            }
+            console.log("NEW CB " + JSON.stringify(newCurrentBet));
+
+            return {
+                currentBet: newCurrentBet
+            }
         }
         /*
-        changeBet: (state, action) => {
-            var newState = {...state}
-            for (const prop in action.payload){
-                newState[prop] = action.payload[prop];
-            }
-            return newState;
-        },
-
         clearBet: (state) => {
             var newState = {...state}
             for (const prop in state){
@@ -71,6 +74,7 @@ export const {
     removeBet,
     initAllBetsForUser,
     clearAllBets,
+    changeCurrentBet,
 } = betsSlice.actions;
 
 export default betsSlice.reducer;

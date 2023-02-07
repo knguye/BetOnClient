@@ -5,7 +5,9 @@ import { ScrollView } from 'react-native';
 import styles from './styles';
 import { Icon, Panel, BetPanel } from '../../utilities/commonViews';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeCurrentBet } from '../../features/bets/betsSlice';
+
 import { REACT_APP_SERVER_API } from '@env'
 
 /*  Features to add TODO:
@@ -18,10 +20,11 @@ import { REACT_APP_SERVER_API } from '@env'
 
 const serverDomain = REACT_APP_SERVER_API;
 
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
     const user = useSelector((state) => state.users);
     const bets = useSelector((state) => state.bets);
-    console.log(user);
+    const currentBet = useSelector((state) => state.currentBet);
+    const dispatch = useDispatch();
 
     const [recentBets, setRecentBets] = useState(<></>);
 
@@ -36,19 +39,27 @@ export default function ProfileScreen() {
         //console.log(recentBets);
     }, [bets]);
 
+    const expandBetDetails = (bet) => {
+        // TODO: Set current bet in Redux
+
+        dispatch(changeCurrentBet(bet));
+        console.log("cb: " + currentBet);
+        navigation.navigate('Bet Details', bet);
+    }
+
+
     const setBetPanels = (bets) => {
         const panels = bets.map((bet, key) => (
-            <BetPanel key={key} info={bet}></BetPanel>
+            <BetPanel onPress={() => expandBetDetails(bet)} key={key} info={bet}></BetPanel>
         ));
 
         setRecentBets(panels);
     }
 
+
     const getRecentBets = async () => {
         const userId = user.id;
         const numBets = 4;
-
-        console.log(userId);
 
         await fetch(`${serverDomain}/users/bets/${userId}/${numBets}`, {
             method: "GET",

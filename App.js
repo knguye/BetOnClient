@@ -2,7 +2,8 @@ import 'react-native-gesture-handler';
 import React, { createContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, HomeScreen, RegistrationScreen, SplashScreen } from './src/screens';
+import { LoginScreen, HomeScreen, RegistrationScreen, SplashScreen, BetDetailsScreen } from './src/screens/index'
+
 import { decode, encode } from 'base-64';
 if (!global.btoa) { global.btoa = encode }
 if (!global.atob) { global.atob = decode }
@@ -43,7 +44,9 @@ export function App() {
   const [loading, setLoading] = useState(true);
  
   useEffect(() => {
+    
     firebase.auth().onAuthStateChanged(user => {
+      setLoading(true);
       if (user) {
         console.log(`USER: \n\n ${JSON.stringify(user)}`)
 
@@ -69,6 +72,7 @@ export function App() {
             dispatch(changeUser(userData));
             //console.log(userData);
             setLoading(false);
+            navigator.navigate('HomeScreen');
         })
         .catch ((err) => {
             setLoading(false);
@@ -90,6 +94,7 @@ export function App() {
       <NavigationContainer>
         <Stack.Navigator>
           { userToken ? (
+            <>
               <Stack.Screen name='HomeScreen' options={ {
                 headerRight: () => <LogoutButton></LogoutButton>,
                 headerStyle: {
@@ -104,6 +109,13 @@ export function App() {
               }}>
                 { props => <HomeScreen {...props} /> }
               </Stack.Screen>
+
+              <Stack.Screen name="Bet Details" component={BetDetailsScreen} options={ {
+                headerShown: false
+              }}>
+
+              </Stack.Screen>
+              </>
           ) : (
             <>
               <Stack.Screen name='LoginScreen' component={LoginScreen} options={ {

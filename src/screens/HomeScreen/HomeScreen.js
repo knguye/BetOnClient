@@ -8,8 +8,8 @@ import { Icon, BetPanel, SocialPanel } from '../../utilities/commonViews';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {ProfileScreen, CreateBetScreen, BalancesScreen, MyBetsScreen} from '../index';
 
-import { ProfileScreen, CreateBetScreen, BalancesScreen, MyBetsScreen } from '../';
 
 //require('dotenv').config();
 
@@ -46,7 +46,7 @@ export function HomeContents() {
     )
 }
 
-export default function HomeScreen(props) {
+export default function HomeScreen({navigation}) {
 
     return (
         <Tab.Navigator>

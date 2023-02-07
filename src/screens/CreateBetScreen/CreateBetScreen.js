@@ -49,9 +49,11 @@ export default function CreateBetScreen({navigation}) {
             default:
                 setSelectedOptionMenu();
         }
+        console.log(title);
+    }, [selectedOption, title]);
 
-    }, [selectedOption]);
 
+    // TODO: Bug with title not updating on text change occasionally. Figure out how to resolve this.
     return (
         <View style={styles.container}>
             <TextField

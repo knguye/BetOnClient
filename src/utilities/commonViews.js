@@ -16,7 +16,7 @@ export function LogoTitle() {
 
 export function Panel(props){
     return (
-        <Card height={props.height} width={props.width} enableShadow={false} containerStyle={
+        <Card onPress={props.onPress} height={props.height} width={props.width} enableShadow={false} containerStyle={
             {
                 marginHorizontal: 10,
                 borderRadius: 6,
@@ -38,30 +38,6 @@ export function SocialPanel(props){
 
 export function BetPanel(props){
     const info = props.info;
-    console.log(info);
-    // TODO: Parse bet info so it shows up formatted.
-
-    /*
-    const data = {
-        owner_id: 'BMrqIxmPuxTpU0tBjf00cIZ4Tqf1',
-        title: 'Test Bet',
-        description: 'This is a test',
-        bet_info: {
-            type: 'Moneyline',
-            isCustomWager: false,
-        teamsWithOdds: [
-                {
-                    team: 'Team 1',
-                    odds: '1.86'
-                },
-                {
-                    team: 'Team 2',
-                    odds: '2.14'
-                }
-            ],
-        },
-        created_at: now,
-    };*/
 
     /* Bet Types:
         Moneyline - Simple ML wager (money)
@@ -71,6 +47,7 @@ export function BetPanel(props){
         Odds - Odds are chosen on a odds ratio
         Custom Wager - Non monetary wager made, no odds (Loser/Winner has/gets to..)
     */
+
     if (info){
         const bet_info = info['bet_info'];
         const team1 = bet_info['teamsWithOdds'][0];
@@ -78,7 +55,7 @@ export function BetPanel(props){
 
             // If bet type == ML
         return (
-            <Panel style={styles.betContainer} height={140} width={280}>
+            <Panel onPress={props.onPress} style={styles.betContainer} height={140} width={280} >
                 <Text h1 style={styles.panelText}>{info.title}</Text>
                 <View style={[styles.odds, styles.panelText]}>
                     <View style={styles.team}>
@@ -96,7 +73,7 @@ export function BetPanel(props){
 
     
     
-    // If bet type == ML
+    // No Info (default case)
     return (
         <Panel style={styles.betContainer} height={140} width={280}>
             <Text h1 style={styles.panelText}>Title</Text>

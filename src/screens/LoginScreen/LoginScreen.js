@@ -32,6 +32,8 @@ export default function LoginScreen({navigation}){
     // Firestore method
     const onLoginPress = () => {
         console.log("API: " + serverDomain);
+        // TODO: Show loading while waiting to log in
+        
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
@@ -53,9 +55,9 @@ export default function LoginScreen({navigation}){
                         alert('User does not exist!');
                         return;
                     }
-                    // TODO: Set redux state usertoken to ID
                     dispatch(changeUser(user));
                     // TODO: Get all bets for that user with state
+
                     navigation.navigate('HomeScreen', user);
                 })
                 .catch ((err) => {

@@ -6,3 +6,4 @@ export { default as ProfileScreen } from './ProfileScreen/ProfileScreen';
 export { default as CreateBetScreen } from './CreateBetScreen/CreateBetScreen';
 export { default as BalancesScreen } from './BalancesScreen/BalancesScreen';
 export { default as MyBetsScreen } from './MyBetsScreen/MyBetsScreen';
+export { default as BetDetailsScreen } from './BetDetailsScreen/BetDetailsScreen'
