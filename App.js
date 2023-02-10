@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+<<<<<<< HEAD
 import { LoginScreen, HomeScreen, RegistrationScreen, SplashScreen } from './src/screens';
+=======
+import { LoginScreen, HomeScreen, RegistrationScreen, SplashScreen, BetDetailsScreen } from './src/screens/index'
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
 
 import { decode, encode } from 'base-64';
 if (!global.btoa) { global.btoa = encode }
@@ -48,9 +52,14 @@ export function App() {
 
  
   useEffect(() => {
+    
     firebase.auth().onAuthStateChanged(user => {
+<<<<<<< HEAD
       dispatch(toggleLoading(true));
       console.log("User changed");
+=======
+      setLoading(true);
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
       if (user) {
         const uid = user.uid; // Get user ID from firebase authentication
         
@@ -73,6 +82,12 @@ export function App() {
                 return;
             }
             dispatch(changeUser(userData));
+<<<<<<< HEAD
+=======
+            //console.log(userData);
+            setLoading(false);
+            navigator.navigate('HomeScreen');
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
         })
         .catch ((err) => {
             dispatch(toggleLoading(false));
@@ -96,6 +111,7 @@ export function App() {
       <NavigationContainer>
         <Stack.Navigator>
           { userToken ? (
+<<<<<<< HEAD
               <Stack.Screen name='Home'
                 options={ {
                   headerRight: () => <LogoutButton></LogoutButton>,
@@ -108,8 +124,30 @@ export function App() {
                   headerTitle: (props) => <LogoTitle {...props}/>,
                   headerTitleAlign: 'center',
                 }}>
+=======
+            <>
+              <Stack.Screen name='HomeScreen' options={ {
+                headerRight: () => <LogoutButton></LogoutButton>,
+                headerStyle: {
+                  backgroundColor: colors['red'],
+                  borderBottomWidth: 0,
+                  height: 100
+                },
+                headerTintColor: colors['lightgrey'],
+                headerTitle: (props) => <LogoTitle {...props}/>,
+                headerTitleAlign: 'center',
+
+              }}>
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
                 { props => <HomeScreen {...props} /> }
               </Stack.Screen>
+
+              <Stack.Screen name="Bet Details" component={BetDetailsScreen} options={ {
+                headerShown: false
+              }}>
+
+              </Stack.Screen>
+              </>
           ) : (
             <>
               <Stack.Screen name='LoginScreen' component={LoginScreen} 

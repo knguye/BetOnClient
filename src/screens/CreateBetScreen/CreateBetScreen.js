@@ -55,14 +55,37 @@ export default function CreateBetScreen({navigation}) {
             default:
                 setSelectedOptionMenu();
         }
+<<<<<<< HEAD
         
         // Reset all wagers
         setCustomWagerEnabled(false);
         setCustomWager();
         setIsValidBet(false);
+=======
+        console.log(title);
+    }, [selectedOption, title]);
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
 
-    }, [selectedOption]);
 
+<<<<<<< HEAD
+=======
+    // TODO: Bug with title not updating on text change occasionally. Figure out how to resolve this.
+    return (
+        <View style={styles.container}>
+            <TextField
+                placeholder={'Enter bet name here..'}
+                placeholderTextColor={"#aaaaaa"}
+                value={title}
+                onChangeText={(text) => setTitle(text)}
+                maxLength={30}
+                style={styles.titleField}
+                ></TextField>
+            <OptionButtonArray options={betOptions} onChange={handleOptionChange} ></OptionButtonArray>
+            { selectedOptionMenu }
+        </View>
+    )
+
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
 
     function ExpandedBetOptions(props) {
         return (

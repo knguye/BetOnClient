@@ -34,7 +34,13 @@ export default function LoginScreen({navigation}){
 
     // Firestore method
     const onLoginPress = () => {
+<<<<<<< HEAD
         console.log("API address: " + serverDomain);
+=======
+        console.log("API: " + serverDomain);
+        // TODO: Show loading while waiting to log in
+        
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
@@ -56,9 +62,16 @@ export default function LoginScreen({navigation}){
                         alert('User does not exist!');
                         return;
                     }
+<<<<<<< HEAD
                 })
                 .then(() => {
                     dispatch(toggleLoading(false));
+=======
+                    dispatch(changeUser(user));
+                    // TODO: Get all bets for that user with state
+
+                    navigation.navigate('HomeScreen', user);
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
                 })
                 .catch ((err) => {
                     alert(err);

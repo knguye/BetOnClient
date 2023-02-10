@@ -99,9 +99,7 @@ export function OptionButtonArray(props){
     const onSelectOption = 
         (item) => {
             setSelected(item);
-
         }
-    
 
     useEffect(() => {
         setOptionButtons(props.options.map((item, key) => (
@@ -112,7 +110,6 @@ export function OptionButtonArray(props){
         )));
     }, [selected])
 
-
     if (props.options){
         return (
             <View style={commonStyles.styles.horizontalContainer}>
@@ -121,9 +118,7 @@ export function OptionButtonArray(props){
                 }
             </View>
         )
-
     }
-
 }
 
 export function OptionButton(props){

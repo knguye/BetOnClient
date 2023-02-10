@@ -8,10 +8,14 @@ import { Icon, BetPanel, SocialPanel } from '../../utilities/commonViews';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {ProfileScreen, CreateBetScreen, BalancesScreen, MyBetsScreen} from '../index';
 
+<<<<<<< HEAD
 import { ProfileScreen, CreateBetScreen, BalancesScreen, MyBetsScreen } from '../';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLoading } from '../../features/status/statusSlice';
+=======
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
 
 //require('dotenv').config();
 
@@ -47,6 +51,7 @@ export function HomeContents() {
     )
 }
 
+<<<<<<< HEAD
 export default function HomeScreen({stateChanger, props}) {
     const userToken = useSelector((state) => state.users.id);
     const dispatch = useDispatch();
@@ -55,6 +60,9 @@ export default function HomeScreen({stateChanger, props}) {
         console.log("user ID: " + userToken);
 
     }, []);
+=======
+export default function HomeScreen({navigation}) {
+>>>>>>> 7c73e5d88137b1971745c55b40e9ab70199ea017
 
     return (
         <Tab.Navigator>
