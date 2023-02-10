@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Image, View} from 'react-native';
 import styles from './styles';
+import { colors } from '../../utilities/commonStyles';
 
 /*  Features to add TODO:
     1. Add animation circular loading to splash screen
@@ -12,6 +13,7 @@ export default function SplashScreen({navigation}){
            <Image 
                 style={styles.logo}
                 source={require('../../../assets/logo.png')}/> 
+            <ActivityIndicator size="large" color={colors['red']}/>
         </View>
     )
 }

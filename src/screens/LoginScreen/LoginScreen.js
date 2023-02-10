@@ -17,11 +17,14 @@ import { changeUser }
     1.  Google login
     2.  Apple login
     3.  Facebook Login
+    4.  Wake up server on login
 */
 
 export default function LoginScreen({navigation}){
     const serverDomain = REACT_APP_SERVER_API;
+    const userToken = useSelector((state) => state.users.id);
     const dispatch = useDispatch();
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -31,7 +34,7 @@ export default function LoginScreen({navigation}){
 
     // Firestore method
     const onLoginPress = () => {
-        console.log("API: " + serverDomain);
+        console.log("API address: " + serverDomain);
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
@@ -53,10 +56,9 @@ export default function LoginScreen({navigation}){
                         alert('User does not exist!');
                         return;
                     }
-                    // TODO: Set redux state usertoken to ID
-                    dispatch(changeUser(user));
-                    // TODO: Get all bets for that user with state
-                    navigation.navigate('HomeScreen', user);
+                })
+                .then(() => {
+                    dispatch(toggleLoading(false));
                 })
                 .catch ((err) => {
                     alert(err);

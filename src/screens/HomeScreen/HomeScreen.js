@@ -10,6 +10,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { ProfileScreen, CreateBetScreen, BalancesScreen, MyBetsScreen } from '../';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleLoading } from '../../features/status/statusSlice';
 
 //require('dotenv').config();
 
@@ -23,7 +25,6 @@ const Tab = createBottomTabNavigator();
 
 export function HomeContents() {
     return (
-        
         <KeyboardAwareScrollView automaticallyAdjustContentInsets={false} 
                                     horizontal={false} 
                                         style={{backgroundColor: colors['black']}}
@@ -46,7 +47,14 @@ export function HomeContents() {
     )
 }
 
-export default function HomeScreen(props) {
+export default function HomeScreen({stateChanger, props}) {
+    const userToken = useSelector((state) => state.users.id);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        console.log("user ID: " + userToken);
+
+    }, []);
 
     return (
         <Tab.Navigator>

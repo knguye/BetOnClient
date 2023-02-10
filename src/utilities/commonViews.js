@@ -2,6 +2,7 @@ import { Image } from "react-native";
 import React, { Component } from 'react';
 import { View, TextField, Text, Button, Card } from 'react-native-ui-lib';
 import { colors, styles } from "./commonStyles";
+import { ActivityIndicator } from "react-native-web";
 
 const cardImage = require('../../assets/beton_banner_red.png');
 
@@ -112,14 +113,6 @@ export function BetPanel(props){
             </View>
         </Panel>
     )
-
-    /*
-    return (
-        <Panel>
-            <Text color={colors['white']} body>{info}</Text>
-        </Panel>
-    )*/
-
 }
 
 
@@ -139,5 +132,11 @@ export function Icon(props){
                 height: props.size ? props.size : 30,
                 
             }} source={sources[props.name]}></Image>
+    )
+}
+
+export function LoadingCircle(props) {
+    return (
+        <ActivityIndicator size={props.size} color={colors[props.color]}/>
     )
 }

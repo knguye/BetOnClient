@@ -11,6 +11,7 @@ import { changeUser }
             from '../../features/users/usersSlice';
 
 import { REACT_APP_SERVER_API } from '@env'
+import { toggleLoading } from '../../features/status/statusSlice';
 
 const serverDomain = REACT_APP_SERVER_API;
 
@@ -36,6 +37,7 @@ export default function RegistrationScreen({navigation}) {
     }
 
     const registerUserOnFirebaseAndDB = () => {
+        dispatch(toggleLoading(true))
         firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -50,8 +52,6 @@ export default function RegistrationScreen({navigation}) {
                 "username": username,
                 "phone_number": phoneNumber,
             };
-            // TODO: Replace localhost with ${process.env.APP_SERVER} when uploading to render
-            
             console.log(`Creating user with ID ${id}, \nbody: ${JSON.stringify(data)}`)
         
             fetch(`${serverDomain}/users`, {
@@ -69,7 +69,8 @@ export default function RegistrationScreen({navigation}) {
             })
             .then((value) => {
                 dispatch(changeUser(data));
-                navigation.navigate('HomeScreen', data);
+                dispatch(toggleLoading(false));
+                //navigation.navigate('HomeScreen', data);
             })
             .catch((err) => {
                 alert(err);
@@ -165,6 +166,7 @@ export default function RegistrationScreen({navigation}) {
                     autoCapitalize="none"
                     autoComplete='tel'
                     inputMode='tel'
+                    maxLength={10}
                 />
                 <TextInput
                     style={styles.input}

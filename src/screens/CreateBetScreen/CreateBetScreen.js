@@ -29,10 +29,16 @@ export default function CreateBetScreen({navigation}) {
     const user = useSelector((state) => state.users);
     const bet = useSelector((state) => state.bets);
 
+    // Bet properties
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [selectedOption, setSelectedOption] = useState();
     const [selectedOptionMenu, setSelectedOptionMenu] = useState();
+
+    // Custom Wagers and checks
+    const [customWagerEnabled, setCustomWagerEnabled] = useState(false);
+    const [customWager, setCustomWager] = useState();
+    const [isValidBet, setIsValidBet] = useState(false);
 
     const betOptions = ['Moneyline', 'Over/Under', 'Player Props'];
     const dispatch = useDispatch();
@@ -49,30 +55,23 @@ export default function CreateBetScreen({navigation}) {
             default:
                 setSelectedOptionMenu();
         }
+        
+        // Reset all wagers
+        setCustomWagerEnabled(false);
+        setCustomWager();
+        setIsValidBet(false);
 
     }, [selectedOption]);
-
-    return (
-        <View style={styles.container}>
-            <TextField
-                placeholder={'Enter bet name here..'}
-                placeholderTextColor={"#aaaaaa"}
-                value={title}
-                onChangeText={(text) => setTitle(text)}
-                maxLength={30}
-                style={styles.titleField}
-                ></TextField>
-            <OptionButtonArray options={betOptions} onChange={handleOptionChange} ></OptionButtonArray>
-            { selectedOptionMenu }
-        </View>
-    )
 
 
     function ExpandedBetOptions(props) {
         return (
             <View>
                 <KeyboardAwareScrollView
-                    style={ { flex: 1, width: '100%', paddingTop: 10} }
+                    style={ { 
+                        flex: 1, 
+                        width: '100%', 
+                        paddingTop: 10} }
                     keyboardShouldPersistTaps="always">
                     {props.children}
                 </KeyboardAwareScrollView>
@@ -92,9 +91,6 @@ export default function CreateBetScreen({navigation}) {
             },
         ]);
     
-        const [customWagerEnabled, setCustomWagerEnabled] = useState(false);
-        const [customWager, setCustomWager] = useState();
-        const [isValidBet, setIsValidBet] = useState(false);
     
         useEffect(() => {
             if (customWager == undefined && (teams[0].odds !== undefined && teams[1].odds !== undefined)){
@@ -115,29 +111,6 @@ export default function CreateBetScreen({navigation}) {
                 setTeam(0, 'odds', customWager);
                 setTeam(1, 'odds', customWager);
             }
-    
-            // Create body for req
-            /*
-            const data = {
-                owner_id: 'BMrqIxmPuxTpU0tBjf00cIZ4Tqf1',
-                title: 'Test Bet',
-                description: 'This is a test',
-                bet_info: {
-                    type: 'Moneyline',
-                    isCustomWager: false,
-                teamsWithOdds: [
-                        {
-                            team: 'Team 1',
-                            odds: '1.86'
-                        },
-                        {
-                            team: 'Team 2',
-                            odds: '2.14'
-                        }
-                    ],
-                },
-                created_at: now,
-            };*/
     
             const now = new Date();
     
@@ -164,8 +137,7 @@ export default function CreateBetScreen({navigation}) {
                 return response.json();
             })
             .then((bets) => {
-                dispatch(appendBet(bets)); //Send the bets to redux state to use within the app presentations 
-                console.log(bets);
+                dispatch(appendBet(bets)); // Send the bets to redux state to use within the app presentations 
                 navigation.navigate('Home');// TODO: Clear the screen or get out
             })
             .catch ((err) => {
@@ -284,6 +256,21 @@ export default function CreateBetScreen({navigation}) {
             </ExpandedBetOptions>
         )
     }
+
+    return (
+        <View style={styles.container}>
+            <TextField
+                placeholder={'Enter bet name here..'}
+                placeholderTextColor={"#aaaaaa"}
+                value={title}
+                onChangeText={(text) => setTitle(text)}
+                maxLength={30}
+                style={styles.titleField}
+                ></TextField>
+            <OptionButtonArray options={betOptions} onChange={handleOptionChange} ></OptionButtonArray>
+            { selectedOptionMenu }
+        </View>
+    )
 }
 
 //TODO: Fade the options in after choosing the type

@@ -49,4 +49,17 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around'
     },
+    loading: {
+        width: 100,
+        height: 'auto',
+        borderRadius: '50%',
+        borderWidth: 10,
+        borderStyle: 'solid',
+        borderRightColor: 'transparent',
+        borderBottomColor: 'transparent',
+    },
+    red: {
+        borderColor: colors['red'],
+
+    }
 })

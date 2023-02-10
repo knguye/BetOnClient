@@ -4,8 +4,10 @@ import { colors } from '../../utilities/commonStyles'
 export default StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: colors['black'],
+        height: '100%',
     },
     title: {
 

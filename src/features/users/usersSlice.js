@@ -12,6 +12,7 @@ export const usersSlice = createSlice({
     reducers: {
         changeUser: (state, action) => {
             // Make copy of original state, go through each prop, change the values with the payload then return that new state
+            
             var newState = {...state}
             for (const prop in action.payload){
                 newState[prop] = action.payload[prop];
