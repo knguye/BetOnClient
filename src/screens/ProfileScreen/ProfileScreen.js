@@ -49,11 +49,13 @@ export default function ProfileScreen({navigation}) {
 
 
     const setBetPanels = (bets) => {
-        const panels = bets.map((bet, key) => (
-            <BetPanel onPress={() => expandBetDetails(bet)} key={key} info={bet}></BetPanel>
-        ));
+        if (bets){
+            const panels = bets.map((bet, key) => (
+                <BetPanel onPress={() => expandBetDetails(bet)} key={key} info={bet}></BetPanel>
+            ));
 
-        setRecentBets(panels);
+            setRecentBets(panels);
+        }
     }
 
 

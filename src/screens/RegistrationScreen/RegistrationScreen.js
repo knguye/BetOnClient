@@ -37,7 +37,8 @@ export default function RegistrationScreen({navigation}) {
     }
 
     const registerUserOnFirebaseAndDB = () => {
-        dispatch(toggleLoading(true))
+        dispatch(toggleLoading(true));
+
         firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -69,7 +70,7 @@ export default function RegistrationScreen({navigation}) {
             })
             .then((value) => {
                 dispatch(changeUser(data));
-                dispatch(toggleLoading(false));
+                //dispatch(toggleLoading(false));
                 //navigation.navigate('HomeScreen', data);
             })
             .catch((err) => {
