@@ -1,8 +1,10 @@
 import { Image } from "react-native";
 import React, { Component } from 'react';
 import { View, TextField, Text, Button, Card } from 'react-native-ui-lib';
-import { colors, styles } from "./commonStyles";
+import { colors, commonStyles } from "./commonStyles";
 import { ActivityIndicator } from "react-native-web";
+import {GiBeerStein} from 'react-icons/gi';
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const cardImage = require('../../assets/beton_banner_red.png');
 
@@ -31,7 +33,7 @@ export function Panel(props){
 
 export function SocialPanel(props){
     return (
-        <Panel style={styles.socialContainer} height={480} width={360}>
+        <Panel style={commonStyles.socialContainer} height={480} width={360}>
 
         </Panel>
     )    
@@ -56,16 +58,16 @@ export function BetPanel(props){
 
             // If bet type == ML
         return (
-            <Panel onPress={props.onPress} style={styles.betContainer} height={140} width={280} >
-                <Text h1 style={styles.panelText}>{info.title}</Text>
-                <View style={[styles.odds, styles.panelText]}>
-                    <View style={styles.team}>
-                        <Icon name={'profile'}></Icon>
-                        <Text style={styles.panelText}>{`${team1['name']}\n${team1['odds']}`}</Text>
+            <Panel onPress={props.onPress} style={commonStyles.betContainer} height={140} width={280} >
+                <Text h1 style={commonStyles.panelText}>{info.title}</Text>
+                <View style={[commonStyles.odds, commonStyles.panelText]}>
+                    <View style={commonStyles.team}>
+                        <FontAwesome5 class={commonStyles.teamIcon} name={`${team1['icon']}`} size="32" color="red"/>
+                        <Text style={commonStyles.panelText}>{`${team1['name']}\n${team1['odds']}`}</Text>
                     </View>
-                    <View style={styles.team}>
-                        <Icon name={'profile'}></Icon>
-                        <Text style={styles.panelText}>{`${team2['name']}\n${team2['odds']}`}</Text>
+                    <View style={commonStyles.team}>
+                        <FontAwesome5 class={commonStyles.teamIcon} name={`${team2['icon']}`} size="32" color="blue"/>
+                        <Text style={commonStyles.panelText}>{`${team2['name']}\n${team2['odds']}`}</Text>
                     </View>
                 </View>
             </Panel>
@@ -76,16 +78,16 @@ export function BetPanel(props){
     
     // No Info (default case)
     return (
-        <Panel style={styles.betContainer} height={140} width={280}>
-            <Text h1 style={styles.panelText}>Title</Text>
-            <View style={[styles.odds, styles.panelText]}>
-                <View style={styles.team}>
+        <Panel style={commonStyles.betContainer} height={140} width={280}>
+            <Text h1 style={commonStyles.panelText}>Title</Text>
+            <View style={[commonStyles.odds, commonStyles.panelText]}>
+                <View style={commonStyles.team}>
                     <Icon name={'profile'}></Icon>
-                    <Text style={styles.panelText}>{`Name\n+100`}</Text>
+                    <Text style={commonStyles.panelText}>{`Name\n+100`}</Text>
                 </View>
-                <View style={styles.team}>
+                <View style={commonStyles.team}>
                     <Icon name={'profile'}></Icon>
-                    <Text style={styles.panelText}>{`Name\n+100`}</Text>
+                    <Text style={commonStyles.panelText}>{`Name\n+100`}</Text>
                 </View>
             </View>
         </Panel>
@@ -100,6 +102,7 @@ export function Icon(props){
         'balances': require('../../assets/icons/icons8-balances-50.png'),
         'mybets': require('../../assets/icons/icons8-mybets-50.png'),
         'create': require('../../assets/icons/icons8-create-50.png'),
+        'beer': <GiBeerStein/>
     }
 
     return (

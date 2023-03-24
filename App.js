@@ -52,6 +52,7 @@ export function App() {
     firebase.auth().onAuthStateChanged(user => {
       dispatch(toggleLoading(true));
       console.log("User changed");
+      
       if (user) {
         const uid = user.uid; // Get user ID from firebase authentication
         
@@ -102,8 +103,9 @@ export function App() {
                 options={ {
                   headerRight: () => <LogoutButton></LogoutButton>,
                   headerStyle: {
-                    backgroundColor: colors['red'],
+                    backgroundColor: colors['primary'],
                     borderBottomWidth: 0,
+                    borderBottomColor: colors['primary'],
                     height: 100
                   },
                   headerTintColor: colors['lightgrey'],

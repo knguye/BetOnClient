@@ -4,7 +4,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: colors['black'],
+        backgroundColor: colors['bg'],
         color: colors['white']
     },
     titleField: {

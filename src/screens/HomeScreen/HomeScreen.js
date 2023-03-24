@@ -27,7 +27,7 @@ export function HomeContents() {
     return (
         <KeyboardAwareScrollView automaticallyAdjustContentInsets={false} 
                                     horizontal={false} 
-                                        style={{backgroundColor: colors['black']}}
+                                        style={{backgroundColor: colors['bg']}}
                                             contentContainerStyle={{alignItems: 'center'}}>
             <View style={{flex: 1}}>
             <Text style={styles.sectionHeader}>Ongoing Bets</Text>
@@ -53,7 +53,6 @@ export default function HomeScreen({stateChanger, props}) {
     
     useEffect(() => {
         console.log("user ID: " + userToken);
-
     }, []);
 
     return (

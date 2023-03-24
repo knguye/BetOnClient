@@ -2,8 +2,8 @@ import { $CombinedState } from '@reduxjs/toolkit';
 import { StyleSheet } from 'react-native';
 
 export const colors = {
-    'red': '#BB1C1C',
-    'black': '#282828',
+    'primary': '#BB1C1C',
+    'bg': '#282828',
     'yellow': '#EEBF27',
     'lightgrey': '#E8E9EB',
     'darkgrey': '#585858',
@@ -15,23 +15,56 @@ export const colors = {
 
 
 // Views
+/*
+    input
+    button
+    buttonText (also sometimes known as buttonTitle)
+*/
 
-export const styles = StyleSheet.create({
+export const commonStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: colors['bg'],
+        color: colors['white'],
+    },
     betContainer:{
         flex: 1,
     },
     horizontalContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around'
     },
     panelText: {
         color: colors['white'],
         paddingBottom: 5,
         textAlign: 'center'
     },
+    input: {
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        paddingLeft: 16,
+        flex: 1,
+        marginBottom: 10,
+        width: '90%',
+        alignSelf: 'center'
+    },
+    button: {
+        backgroundColor: colors['primary'],
+        alignItems: "center",
+        justifyContent: 'center',
+        borderRadius: 5,
+        height: 48,
+    },
     buttonText: {
         color: colors['white'],
         userSelect: 'none',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: 'bold',
     },  
     optionButton:{
         paddingVertical: 10,
@@ -43,6 +76,9 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       flexDirection: 'column', 
       justifyContent: 'center', 
+    },
+    teamIcon: {
+
     },
     odds: {
         width: '100%',
@@ -60,6 +96,19 @@ export const styles = StyleSheet.create({
     },
     red: {
         borderColor: colors['red'],
-
+    },
+    footerView: {
+        flex: 1,
+        alignItems: "center",
+        marginTop: 20
+    },
+    footerText: {
+        fontSize: 16,
+        color: colors['white'],
+    },
+    footerLink: {
+        color: colors['primary'],
+        fontWeight: "bold",
+        fontSize: 16
     }
 })

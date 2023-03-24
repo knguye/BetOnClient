@@ -5,7 +5,7 @@ import styles from './styles';
 import { TextField } from 'react-native-ui-lib/src/incubator';
 import { OptionButton, OptionButtonArray, SubmitButton } from '../../utilities/buttons';
 
-import * as commonStyles from '../../utilities/commonStyles';
+import {commonStyles, colors} from '../../utilities/commonStyles';
 import { Icon } from '../../utilities/commonViews';
 import { KeyboardAwareScrollView, Switch } from 'react-native-ui-lib';
 import { TextInput } from 'react-native-gesture-handler';

@@ -3,7 +3,9 @@ import { View, Text, Card} from 'react-native-ui-lib';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { ScrollView } from 'react-native';
 import styles from './styles';
+import { commonStyles } from '../../utilities/commonStyles';
 import { Icon, Panel, BetPanel } from '../../utilities/commonViews';
+import { dummyBets } from '../../../__globals__';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCurrentBet } from '../../features/bets/betsSlice';
@@ -36,17 +38,13 @@ export default function ProfileScreen({navigation}) {
 
     useEffect(() => {
         getRecentBets();
-        //console.log(recentBets);
     }, [bets]);
 
     const expandBetDetails = (bet) => {
-        // TODO: Set current bet in Redux
-
         dispatch(changeCurrentBet(bet));
         console.log("cb: " + currentBet);
         navigation.navigate('Bet Details', bet);
     }
-
 
     const setBetPanels = (bets) => {
         if (bets){
@@ -60,31 +58,36 @@ export default function ProfileScreen({navigation}) {
 
 
     const getRecentBets = async () => {
-        const userId = user.id;
+        const userId = user.id; 
         const numBets = 4;
 
-        await fetch(`${serverDomain}/users/bets/${userId}/${numBets}`, {
-            method: "GET",
-            headers: {
-                "Content-type": "application/json"
-            },
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((bets) => {
-            //console.log(JSON.stringify(bets));
-            setBetPanels(bets);
-        })
-        .catch ((err) => {
-            console.log(err);
-        });
+        // TODO: Delete this
+        if (dummyBets) {
+            setBetPanels(dummyBets);
+        }
+        else {
+            await fetch(`${serverDomain}/users/bets/${userId}/${numBets}`, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                },
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((bets) => {
+                setBetPanels(bets);
+            })
+            .catch ((err) => {
+                console.log(err);
+            });
+        }
     }
 
 
 
     return (
-        <View style={styles.container}>
+        <View style={commonStyles.container}>
             <KeyboardAwareScrollView style={styles.profile}>
                 <View style={styles.profileHeader}>
                     <Icon size={50} name={'profile'} style= {styles.profilePicture}></Icon>

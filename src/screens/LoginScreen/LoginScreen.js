@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { firebase } from '../../firebase/config'
@@ -12,6 +11,10 @@ import { REACT_APP_SERVER_API } from '@env'
 import { changeUser } 
             from '../../features/users/usersSlice';
 import { toggleLoading } from '../../features/status/statusSlice';
+import { dummyUser } from '../../../__globals__';
+
+import styles from './styles';
+import { commonStyles } from '../../utilities/commonStyles';
 
 
 /*  Features to add TODO:
@@ -33,10 +36,27 @@ export default function LoginScreen({navigation}){
         navigation.navigate('RegistrationScreen');
     }
 
+    function LogUserInWithCredentials(uid, user){
+        if (user.id != uid && !dummyUser){
+            console.error('User does not exist!');
+            return;
+        }
+        console.log(`Logging in ${uid}`)
+        //storeInLocalStorage(['id', 'first_name', 'last_name'], [user.id, user.first_name, user.last_name]);
+        dispatch(changeUser(user));        
+    }
+
     // Firestore method
     const onLoginPress = () => {
         console.log("API address: " + serverDomain);
-        firebase
+        dispatch(toggleLoading(true));
+
+        if (dummyUser){ 
+            LogUserInWithCredentials("test", dummyUser);
+            dispatch(toggleLoading(false));
+        }
+        else {
+            firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
@@ -68,10 +88,12 @@ export default function LoginScreen({navigation}){
             .catch(error => {
                 alert(error);
             })
+        }
+        
     }
 
     return (
-        <View style={styles.container}>
+        <View style={commonStyles.container}>
             <KeyboardAwareScrollView
                 style={ { flex: 1, width: '100%'} }
                 keyboardShouldPersistTaps="always">
@@ -79,7 +101,7 @@ export default function LoginScreen({navigation}){
                     style={styles.logo}
                     source={require('../../../assets/logo.png')} />    
                 <TextInput
-                    style={styles.input}
+                    style={commonStyles.input}
                     placeholder='E-mail'
                     placeholderTextColor={"#aaaaaa"}
                     onChangeText={(text) => setEmail(text)}
@@ -87,7 +109,7 @@ export default function LoginScreen({navigation}){
                     underlineColorAndroid={"transparent"}
                     autoCapitalize='none'/>
                 <TextInput
-                    style={styles.input}
+                    style={commonStyles.input}
                     secureTextEntry
                     placeholder='Password'
                     placeholderTextColor={"#aaaaaa"}
@@ -96,14 +118,14 @@ export default function LoginScreen({navigation}){
                     underlineColorAndroid={"transparent"}
                     autoCapitalize='none'/>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={{...commonStyles.button, ...styles.button,}}
                     onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in</Text>
+                    <Text style={{...commonStyles.buttonText, ...styles.buttonText}}>Log in</Text>
                 </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>
+                <View style={commonStyles.footerView}>
+                    <Text style={commonStyles.footerText}>
                         Don't have an account? 
-                        <Text onPress={() => onFooterLinkPress()} style={styles.footerLink}> Sign up</Text>
+                        <Text onPress={() => onFooterLinkPress()} style={commonStyles.footerLink}> Sign up</Text>
                     </Text>
                 </View>
             </KeyboardAwareScrollView>
