@@ -80,6 +80,13 @@ export const commonStyles = StyleSheet.create({
     teamIcon: {
 
     },
+    teamName: {
+        height: 48,
+        fontSize: 36,
+        textAlign: 'center',
+        color: colors['white'],
+        marginVertical: 10,
+    },
     odds: {
         width: '100%',
         flexDirection: 'row',

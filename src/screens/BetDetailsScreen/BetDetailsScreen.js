@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import styles from './styles'
 import { colors, commonStyles } from '../../utilities/commonStyles';
 import { teamIcons } from '../../../__globals__';
+import { TeamPanel } from '../../utilities/commonViews';
 
 import { useEffect } from 'react';
 
@@ -42,17 +43,11 @@ export default function BetDetailsScreen({route, navigation}){
                 </View>
 
                 <View style={commonStyles.horizontalContainer}>
-                    <View style={{...commonStyles.container, ...styles.container}}>
-                        <FontAwesome5 class={commonStyles.teamIcon} name={`${teamIcons[team1.icon]}`} size="32" color="red"/>
-                        <Text style={styles.teamName}>{team1.name}</Text>
-                    </View>
+                    <TeamPanel info={team1} color={'red'}></TeamPanel>
 
                     <Text style={styles.textSmall}>VS</Text>
 
-                    <View style={{...commonStyles.container, ...styles.container}}>
-                        <FontAwesome5 class={commonStyles.teamIcon} name={`${teamIcons[team2.icon]}`} size="32" color="blue"/>
-                        <Text style={styles.teamName}>{team2.name}</Text>
-                    </View>
+                    <TeamPanel info={team2} color={'blue'}></TeamPanel>
                 </View>
         </View>
     );

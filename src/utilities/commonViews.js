@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { View, TextField, Text, Button, Card } from 'react-native-ui-lib';
 import { colors, commonStyles } from "./commonStyles";
 import { ActivityIndicator } from "react-native-web";
-import {GiBeerStein} from 'react-icons/gi';
+
+import { teamIcons } from "../../__globals__";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const cardImage = require('../../assets/beton_banner_red.png');
@@ -18,17 +19,33 @@ export function LogoTitle() {
 
 
 export function Panel(props){
+
+    if (props.bgEnabled){
+        return (
+            <Card onPress={props.onPress} height={props.height} width={props.width} enableShadow={false} containerStyle={
+                {
+                    marginHorizontal: 10,
+                    borderRadius: 6,
+                    backgroundColor: colors['darkgrey'],
+                }
+            } center padding-card marginB-s4>
+                {props.children}
+            </Card>
+        )
+    }
+
     return (
         <Card onPress={props.onPress} height={props.height} width={props.width} enableShadow={false} containerStyle={
             {
                 marginHorizontal: 10,
                 borderRadius: 6,
-                backgroundColor: colors['darkgrey'],
+                backgroundColor: colors['bg'],
             }
         } center padding-card marginB-s4>
             {props.children}
         </Card>
     )
+
 }
 
 export function SocialPanel(props){
@@ -37,6 +54,24 @@ export function SocialPanel(props){
 
         </Panel>
     )    
+}
+
+export function TeamPanel(props){
+    const info = props.info;
+
+    if (info) {
+        const icon = info['icon'];
+        const name = info['name'];
+        const odds = info['odds'];
+
+
+        return (
+            <Panel onPress={props.onPress} style={commonStyles.betContainer}>
+                <FontAwesome5 class={commonStyles.teamIcon} name={icon} size="32" color={props.color}/>
+                <Text style={commonStyles.teamName}>{name}</Text>
+            </Panel>
+        )
+    }
 }
 
 export function BetPanel(props){
@@ -56,7 +91,7 @@ export function BetPanel(props){
         const team1 = bet_info['teamsWithOdds'][0];
         const team2 = bet_info['teamsWithOdds'][1];
 
-            // If bet type == ML
+        // If bet type == ML
         return (
             <Panel onPress={props.onPress} style={commonStyles.betContainer} height={140} width={280} >
                 <Text h1 style={commonStyles.panelText}>{info.title}</Text>
@@ -102,7 +137,6 @@ export function Icon(props){
         'balances': require('../../assets/icons/icons8-balances-50.png'),
         'mybets': require('../../assets/icons/icons8-mybets-50.png'),
         'create': require('../../assets/icons/icons8-create-50.png'),
-        'beer': <GiBeerStein/>
     }
 
     return (

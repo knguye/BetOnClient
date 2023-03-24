@@ -34,7 +34,7 @@ const teamIcons = {
 
 var randomProperty = function (obj) {
     var keys = Object.keys(obj);
-    return keys[ keys.length * Math.random() << 0];
+    return obj[keys[ keys.length * Math.random() << 0]];
 };
 
 const teamIcons = {
