@@ -1,4 +1,3 @@
-import { $CombinedState } from '@reduxjs/toolkit';
 import { StyleSheet } from 'react-native';
 
 export const colors = {
@@ -41,11 +40,21 @@ export const commonStyles = StyleSheet.create({
         paddingBottom: 5,
         textAlign: 'center'
     },
+    panel: {
+        borderColor: 'white',
+        borderWidth: 5,
+    },
+    subHeader: {
+        paddingLeft: 5,
+        color: colors['white'],
+        fontSize: 24,
+    },
     input: {
         height: 48,
         borderRadius: 5,
         overflow: 'hidden',
-        backgroundColor: 'white',
+        backgroundColor: colors['bg'],
+        color: colors['white'],
         paddingLeft: 16,
         flex: 1,
         marginBottom: 10,
@@ -91,6 +100,10 @@ export const commonStyles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around'
+    },
+    oddsText: {
+        fontSize: 24,
+        color: colors['white']
     },
     loading: {
         width: 100,

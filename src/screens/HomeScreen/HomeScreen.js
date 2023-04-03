@@ -34,10 +34,10 @@ export function HomeContents() {
                 <ScrollView padding-page
                                     horizontal={true} 
                                         style={styles.showcase}>
-                    <BetPanel></BetPanel>
-                    <BetPanel></BetPanel>
-                    <BetPanel></BetPanel>
-                    <BetPanel></BetPanel>
+                    <BetPanel bgEnabled={true}></BetPanel>
+                    <BetPanel bgEnabled={true}></BetPanel>
+                    <BetPanel bgEnabled={true}></BetPanel>
+                    <BetPanel bgEnabled={true}></BetPanel>
                 </ScrollView>
             </View>
             <SocialPanel></SocialPanel>

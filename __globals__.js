@@ -1,6 +1,3 @@
-import {GiAmericanFootballBall, GiAnchor, GiAstronautHelmet, GiBananaPeeled, GiBasketballBall, GiBattleAxe, GiBeerStein, GiBison} from 'react-icons/gi'
-import Ionicons from '@expo/vector-icons/Ionicons';
-
 const production = {
     serverDomain: 'https://bet-on-server.onrender.com'
 }

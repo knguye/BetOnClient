@@ -6,6 +6,7 @@ import { ActivityIndicator } from "react-native-web";
 
 import { teamIcons } from "../../__globals__";
 import { FontAwesome5 } from "@expo/vector-icons";
+import commons from "react-native-ui-lib/src/commons";
 
 const cardImage = require('../../assets/beton_banner_red.png');
 
@@ -27,6 +28,7 @@ export function Panel(props){
                     marginHorizontal: 10,
                     borderRadius: 6,
                     backgroundColor: colors['darkgrey'],
+                    border: '1px solid white'
                 }
             } center padding-card marginB-s4>
                 {props.children}
@@ -40,6 +42,7 @@ export function Panel(props){
                 marginHorizontal: 10,
                 borderRadius: 6,
                 backgroundColor: colors['bg'],
+                border: '1px solid white'
             }
         } center padding-card marginB-s4>
             {props.children}
@@ -66,9 +69,10 @@ export function TeamPanel(props){
 
 
         return (
-            <Panel onPress={props.onPress} style={commonStyles.betContainer}>
+            <Panel onPress={props.onPress} style={{...commonStyles.betContainer, ...commonStyles.panel}}>
                 <FontAwesome5 class={commonStyles.teamIcon} name={icon} size="32" color={props.color}/>
                 <Text style={commonStyles.teamName}>{name}</Text>
+                <Text style={commonStyles.oddsText}>{odds}</Text>
             </Panel>
         )
     }
@@ -93,7 +97,7 @@ export function BetPanel(props){
 
         // If bet type == ML
         return (
-            <Panel onPress={props.onPress} style={commonStyles.betContainer} height={140} width={280} >
+            <Panel onPress={props.onPress} style={{...commonStyles.betContainer, ...commonStyles.panel}} height={140} width={280} >
                 <Text h1 style={commonStyles.panelText}>{info.title}</Text>
                 <View style={[commonStyles.odds, commonStyles.panelText]}>
                     <View style={commonStyles.team}>

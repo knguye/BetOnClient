@@ -93,7 +93,7 @@ export default function ProfileScreen({navigation}) {
                     <Icon size={50} name={'profile'} style= {styles.profilePicture}></Icon>
                     <Text style={styles.profileTitle}>{user.username}</Text>
                 </View>
-                <Text>Recent Bets</Text>
+                <Text style={commonStyles.subHeader}>Recent Bets</Text>
                 <ScrollView horizontal style={styles.recentBets}>
                     {recentBets}
                 </ScrollView>

@@ -43,11 +43,11 @@ export default function BetDetailsScreen({route, navigation}){
                 </View>
 
                 <View style={commonStyles.horizontalContainer}>
-                    <TeamPanel info={team1} color={'red'}></TeamPanel>
+                    <TeamPanel info={team1} color={'white'}></TeamPanel>
 
                     <Text style={styles.textSmall}>VS</Text>
 
-                    <TeamPanel info={team2} color={'blue'}></TeamPanel>
+                    <TeamPanel info={team2} color={'white'}></TeamPanel>
                 </View>
         </View>
     );
